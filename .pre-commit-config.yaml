@@ -17,19 +17,11 @@ repos:
       - id: check-case-conflict
       - id: check-added-large-files
 
-  # python code formatting
-  - repo: https://github.com/psf/black
-    rev: 23.1.0
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.9.5
     hooks:
-      - id: black
-        args: [--line-length, "99"]
-
-  # python import sorting
-  - repo: https://github.com/PyCQA/isort
-    rev: 5.12.0
-    hooks:
-      - id: isort
-        args: ["--profile", "black", "--filter-files"]
+      - id: ruff
+      - id: ruff-format
 
   # python upgrading syntax to newer version
   - repo: https://github.com/asottile/pyupgrade
@@ -37,20 +29,6 @@ repos:
     hooks:
       - id: pyupgrade
         args: [--py38-plus]
-
-  # python docstring formatting
-  - repo: https://github.com/myint/docformatter
-    rev: v1.7.4
-    hooks:
-      - id: docformatter
-        args:
-          [
-            --in-place,
-            --wrap-summaries=99,
-            --wrap-descriptions=99,
-            --style=sphinx,
-            --black,
-          ]
 
   # python docstring coverage checking
   - repo: https://github.com/econchick/interrogate
@@ -102,19 +80,6 @@ repos:
     rev: v0.9.0.2
     hooks:
       - id: shellcheck
-
-  # md formatting
-  - repo: https://github.com/executablebooks/mdformat
-    rev: 0.7.16
-    hooks:
-      - id: mdformat
-        args: ["--number"]
-        additional_dependencies:
-          - mdformat-gfm
-          - mdformat-tables
-          - mdformat_frontmatter
-          # - mdformat-toc
-          # - mdformat-black
 
   # word spelling linter
   - repo: https://github.com/codespell-project/codespell
