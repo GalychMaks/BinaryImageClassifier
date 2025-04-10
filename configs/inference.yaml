@@ -10,7 +10,10 @@ defaults:
   - extras: default
   - hydra: default
 
-task_name: "eval"
+task_name: "inference"
 
-# passing checkpoint path is necessary for evaluation
+# Path to the image file to predict
+image_path: ???
+
+# Path to the model checkpoint
 ckpt_path: ???
