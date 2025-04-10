@@ -3,7 +3,7 @@ import os
 from typing import Optional, Tuple
 
 import torch
-from pytorch_lightning import LightningDataModule
+from lightning.pytorch import LightningDataModule
 from torch.utils.data import DataLoader, random_split
 from torchvision import transforms
 
@@ -49,6 +49,14 @@ class ArtifactImageDataModule(LightningDataModule):
         self.data_train = None
         self.data_val = None
         self.data_test = None
+
+    def prepare_data(self) -> None:
+        """
+        Placeholder for data preparation logic (e.g., download).
+        Not used in this case since data is assumed to be already present locally.
+        """
+        super().prepare_data()
+        pass
 
     def setup(self, stage: Optional[str] = None):
         """

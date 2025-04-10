@@ -1,5 +1,5 @@
 import torch.nn as nn
-from torchvision import models
+from torchvision.models import ResNet18_Weights, resnet18
 
 
 class ResNet18(nn.Module):
@@ -10,15 +10,15 @@ class ResNet18(nn.Module):
     to support a specified number of output classes.
     """
 
-    def __init__(self, num_classes: int = 2, pretrained: bool = True):
+    def __init__(self, num_classes: int = 2, weights=ResNet18_Weights.DEFAULT):
         """
         Initialize the ResNet18 model.
 
         :param num_classes: Number of output classes (e.g., 2 for binary classification).
-        :param pretrained: Whether to load pretrained ImageNet weights.
+        :param weights: Pretrained weights to use (e.g., ResNet18_Weights.DEFAULT or None).
         """
         super().__init__()
-        self.model = models.resnet18(pretrained=pretrained)
+        self.model = resnet18(weights=weights)
         self.model.fc = nn.Linear(self.model.fc.in_features, num_classes)
 
     def forward(self, x):
