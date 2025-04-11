@@ -54,7 +54,7 @@ def predict_image(cfg: DictConfig) -> Tuple[str, float]:
         confidence = probabilities[0][predicted_class].item()
 
         # Adjust your logic for determining class_name if necessary
-        class_name = "artifact" if predicted_class == 1 else "clean"
+        class_name = "artifact" if predicted_class == 0 else "clean"
 
     return class_name, confidence
 
