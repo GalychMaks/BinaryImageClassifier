@@ -98,3 +98,12 @@ python app.py
 ```
 
 This will start a local web server where you can upload images and test the model interactively.
+
+## References
+
+- [PyTorch](https://pytorch.org/) - Deep learning framework
+- [PyTorch Lightning](https://www.pytorchlightning.ai/) - Deep learning framework for training and scaling
+- [Hydra](https://hydra.cc/) - Framework for elegantly configuring complex applications
+- [Lightning-Hydra-Template](https://github.com/ashleve/lightning-hydra-template) - Project template for PyTorch Lightning and Hydra
+- [Gradio](https://www.gradio.app/) - Web interface for machine learning models
+- [ResNet18](https://pytorch.org/vision/main/models/generated/torchvision.models.resnet18) - Pre-trained convolutional neural network architecture used as the backbone for binary image classification
