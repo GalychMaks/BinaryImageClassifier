@@ -14,9 +14,10 @@ scheduler:
   patience: 10
 
 net:
-  _target_: src.models.components.resnet_backbone.ResNet18
+  _target_: src.models.components.efficientnet_backbone.EfficientNetB0
   num_classes: 2
-  weights: ResNet18_Weights.DEFAULT
+  weights: EfficientNet_B0_Weights.DEFAULT
+  freeze_backbone: false
 
 # compile model for faster training with pytorch 2.0
 compile: false

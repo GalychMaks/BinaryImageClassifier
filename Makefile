@@ -20,4 +20,4 @@ sync: ## Merge changes from main branch to your current branch
 	git pull origin main
 
 train: ## Train the model
-	python src/train.py experiment=example
+	python src/train.py

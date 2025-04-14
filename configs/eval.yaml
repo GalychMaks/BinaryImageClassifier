@@ -2,8 +2,8 @@
 
 defaults:
   - _self_
-  - data: artifact
-  - model: artifact
+  - data: default
+  - model: resnet
   - logger: csv
   - trainer: default
   - paths: default
