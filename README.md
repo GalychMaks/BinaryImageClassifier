@@ -57,7 +57,7 @@ Where:
 
 - image_00045_0.png
 
-- 0 image_01234_1.png
+- image_01234_1.png
 
 No additional metadata or folder-level class separation is required — the class label is parsed directly from the filename.
 
@@ -96,13 +96,19 @@ python src/train.py trainer=gpu
 Train model with chosen experiment configuration from [configs/experiment/](configs/experiment/):
 
 ```bash
-python src/train.py experiment=example
+python src/train.py experiment=v1
 ```
 
 You can override any parameter from command line like this:
 
 ```bash
 python src/train.py trainer.max_epochs=20 data.batch_size=64
+```
+
+Run all experiments in once:
+
+```bash
+python src/train.py --multirun experiment=v1,v2,v3,v4
 ```
 
 ### 📈 Evaluation
@@ -128,7 +134,7 @@ python src/inference.py \
 Run the Gradio web interface for model testing:
 
 ```bash
-python app.py
+python app.py ckpt_path=path/to/checkpoint.ckpt
 ```
 
 This will start a local web server where you can upload images and test the model interactively.
@@ -150,7 +156,7 @@ Below are the summarized results across training, validation, and test sets. The
 
 ### 📈 Performance Metrics
 
-| Experiment | Train Loss | Val Loss | Test Loss | Train F1 | Val F1 | Test F1 |
+| Experiment | ⬇️ Train Loss | ⬇️ Val Loss | ⬇️ Test Loss | ⬆️ Train F1 | ⬆️ Val F1 | ⬆️ Test F1 |
 |------------|------------|----------|-----------|----------|--------|---------|
 | v1         | 0.174      | 0.182    | **0.153** | 0.970    | 0.962  | 0.970   |
 | v2         | **0.123**  | **0.094**| 0.164     | **0.977**| **0.985**| **0.981** |

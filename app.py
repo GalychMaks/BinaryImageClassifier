@@ -41,7 +41,6 @@ def main(cfg: DictConfig) -> None:
             image_path = tmp.name
 
         cfg.image_path = image_path
-        cfg.ckpt_path = "logs/train/runs/2025-04-10_15-54-36/checkpoints/epoch_018.ckpt"
 
         predicted_class, confidence = predict_image(cfg)
 
