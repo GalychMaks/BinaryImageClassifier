@@ -135,7 +135,7 @@ This will start a local web server where you can upload images and test the mode
 
 ## 📊 Results
 
-I conducted a series of experiments to evaluate the performance of different model architectures and training strategies on a classification task. All training was done on the **It-Jim Trainee Program 2025 Dataset — Task 3 (Deep Learning)**.
+I conducted a series of experiments to evaluate the performance of different model architectures and training strategies on a classification task. All training was done on the **It-Jim Trainee Program 2025 Dataset — Task 1 (Deep Learning)**.
 
 Below are the summarized results across training, validation, and test sets. The best scores for each metric are **bolded**.
 
@@ -150,18 +150,18 @@ Below are the summarized results across training, validation, and test sets. The
 
 ### 📈 Performance Metrics
 
-| Experiment | Train Loss ⬇️ | Train F1 ⬆️ | Val Loss ⬇️ | Val F1 ⬆️ | Test Loss ⬇️ | Test F1 ⬆️ |
-|------------|----------------|-------------|-------------|------------|---------------|-------------|
-| v1         | **0.018**      | **0.996**   | **0.127**   | **0.985**  | **0.1627**     | **0.9781**   |
-| v2         | 0.029          | 0.995       | 0.165       | 0.982      | 0.2292         | 0.9730       |
-| v3         | 0.198          | 0.964       | 0.166       | 0.974      | 0.1960         | 0.9624       |
-| v4         | 0.225          | 0.954       | 0.224       | 0.964      | 0.2375         | 0.9496       |
+| Experiment | Train Loss | Val Loss | Test Loss | Train F1 | Val F1 | Test F1 |
+|------------|------------|----------|-----------|----------|--------|---------|
+| v1         | 0.174      | 0.182    | **0.153** | 0.970    | 0.962  | 0.970   |
+| v2         | **0.123**  | **0.094**| 0.164     | **0.977**| **0.985**| **0.981** |
+| v3         | 0.253      | 0.186    | 0.205     | 0.953    | 0.965  | 0.952   |
+| v4         | 0.286      | 0.215    | 0.240     | 0.946    | 0.967  | 0.949   |
 
 ### 📝 Observations
 
-- **v1 (ResNet18, full fine-tuning)** achieved the best overall performance across all datasets.
-- **Freezing the backbone** (v3 & v4) significantly degraded model performance, highlighting the importance of full fine-tuning for this task.
-- EfficientNet models (v2 & v4) performed well but were slightly behind ResNet18 in this setup.
+- **Best Overall:** v2 (EfficientNet + full fine-tuning) achieves the best overall performance with the highest F1 scores and lowest train/val losses.
+- **Model Architecture:** EfficientNet outperforms ResNet18 in both full fine-tuning and frozen settings.
+- **Backbone Freezing:** Freezing the backbone (v3, v4) consistently reduces performance, regardless of model.
 
 ## 📚 References
 
@@ -170,4 +170,5 @@ Below are the summarized results across training, validation, and test sets. The
 - [Hydra](https://hydra.cc/) - Framework for elegantly configuring complex applications
 - [Lightning-Hydra-Template](https://github.com/ashleve/lightning-hydra-template) - Project template for PyTorch Lightning and Hydra
 - [Gradio](https://www.gradio.app/) - Web interface for machine learning models
-- [ResNet18](https://pytorch.org/vision/main/models/generated/torchvision.models.resnet18) - Pre-trained convolutional neural network architecture used as the backbone for binary image classification
+- [ResNet18](https://pytorch.org/vision/main/models/generated/torchvision.models.resnet18) - A lightweight residual neural network architecture commonly used for image classification
+- [EfficientNetB0](https://pytorch.org/vision/main/models/generated/torchvision.models.efficientnet_b0.html#torchvision.models.efficientnet_b0) - A scalable and efficient convolutional neural network architecture designed for high accuracy with fewer parameters
