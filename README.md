@@ -13,7 +13,7 @@
 
 This project implements a binary image classification system designed to detect visual artifacts in AI-generated images. Built with PyTorch and PyTorch Lightning, it provides a robust framework for training and evaluating models that can distinguish between clean and artifact-containing AI-generated images.
 
-### Key Features
+### 💡 Key Features
 
 - **PyTorch Lightning**: Enables clean, maintainable, and scalable code with a modern architecture
 
@@ -27,7 +27,41 @@ This project implements a binary image classification system designed to detect 
 
 - **Gradio**: Provides a simple web interface for testing and demonstrating the model
 
-## Installation
+### 📂 Expected Data Format
+
+The project expects the input dataset to be organized in the following directory structure:
+
+```bash
+data/
+├── train/
+└── test/
+```
+
+Each subdirectory (train/, test/) should contain image files named using the following pattern:
+
+```bash
+image_<frame_index>_<label>.png
+```
+
+Where:
+
+- <frame_index> is a unique numeric ID or frame number
+
+- <label\> is either:
+
+  - 0 – for images with artifacts
+
+  - 1 – for artifact-free images
+
+**Example Filenames:**
+
+- image_00045_0.png
+
+- 0 image_01234_1.png
+
+No additional metadata or folder-level class separation is required — the class label is parsed directly from the filename.
+
+## 🔧 Installation
 
 ```bash
 # clone project
@@ -45,9 +79,9 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## How to run
+## 🚀 How to run
 
-### Training
+### 🧠 Training
 
 Train model with default configuration:
 
@@ -71,7 +105,7 @@ You can override any parameter from command line like this:
 python src/train.py trainer.max_epochs=20 data.batch_size=64
 ```
 
-### Evaluation
+### 📈 Evaluation
 
 Evaluate trained model:
 
@@ -79,7 +113,7 @@ Evaluate trained model:
 python src/eval.py ckpt_path=path/to/checkpoint.ckpt
 ```
 
-### Inference
+### 🔍 Inference
 
 Run inference on a single image from command line:
 
@@ -89,7 +123,7 @@ python src/inference.py \
     ckpt_path=path/to/checkpoint.ckpt
 ```
 
-### Gradio Interface
+### 🌐 Gradio Interface
 
 Run the Gradio web interface for model testing:
 
@@ -99,7 +133,37 @@ python app.py
 
 This will start a local web server where you can upload images and test the model interactively.
 
-## References
+## 📊 Results
+
+I conducted a series of experiments to evaluate the performance of different model architectures and training strategies on a classification task. All training was done on the **It-Jim Trainee Program 2025 Dataset — Task 3 (Deep Learning)**.
+
+Below are the summarized results across training, validation, and test sets. The best scores for each metric are **bolded**.
+
+### 🔬 Experiment Configurations
+
+| Experiment | Model        | Backbone Frozen | Accelerator | Tags                               |
+|------------|--------------|------------------|-------------|------------------------------------|
+| v1         | ResNet18     | ❌               | GPU         | `["resnet18", "full-finetune"]`    |
+| v2         | EfficientNet | ❌               | CPU         | `["efficientnet", "full-finetune"]`|
+| v3         | ResNet18     | ✅               | GPU         | `["resnet18", "freeze-backbone"]`  |
+| v4         | EfficientNet | ✅               | CPU         | `["efficientnet", "freeze-backbone"]`|
+
+### 📈 Performance Metrics
+
+| Experiment | Train Loss ⬇️ | Train F1 ⬆️ | Val Loss ⬇️ | Val F1 ⬆️ | Test Loss ⬇️ | Test F1 ⬆️ |
+|------------|----------------|-------------|-------------|------------|---------------|-------------|
+| v1         | **0.018**      | **0.996**   | **0.127**   | **0.985**  | **0.1627**     | **0.9781**   |
+| v2         | 0.029          | 0.995       | 0.165       | 0.982      | 0.2292         | 0.9730       |
+| v3         | 0.198          | 0.964       | 0.166       | 0.974      | 0.1960         | 0.9624       |
+| v4         | 0.225          | 0.954       | 0.224       | 0.964      | 0.2375         | 0.9496       |
+
+### 📝 Observations
+
+- **v1 (ResNet18, full fine-tuning)** achieved the best overall performance across all datasets.
+- **Freezing the backbone** (v3 & v4) significantly degraded model performance, highlighting the importance of full fine-tuning for this task.
+- EfficientNet models (v2 & v4) performed well but were slightly behind ResNet18 in this setup.
+
+## 📚 References
 
 - [PyTorch](https://pytorch.org/) - Deep learning framework
 - [PyTorch Lightning](https://www.pytorchlightning.ai/) - Deep learning framework for training and scaling
